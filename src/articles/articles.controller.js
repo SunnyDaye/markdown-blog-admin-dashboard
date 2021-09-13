@@ -14,12 +14,12 @@ const list = (req,res) => {
       res.render("articles/index.ejs", { articles });
 }
 
-const create = (req,res) => {
+const renderNewScreen = (req,res) => {
     res.render('articles/new');
 }
 
 
 module.exports = {
     list: list,
-    create: create,
+    renderNewScreen: renderNewScreen,
 }
