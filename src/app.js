@@ -9,6 +9,10 @@ const articlesRouter = require("./articles/articles.router");
 /*View Engine for server side rendering*/
 app.set("view engine", "ejs");
 
+
+app.get('/', (req,res) => {//Landing page is /articles
+    res.redirect('/articles');
+})
 /*Main*/
 app.use("/articles", articlesRouter);
 
