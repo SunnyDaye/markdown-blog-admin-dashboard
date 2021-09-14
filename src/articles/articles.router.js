@@ -6,5 +6,5 @@ router.route('/')
 
 router.route('/new')
     .get(controller.renderNewScreen)
-    .post();
+    .post(controller.create);
 module.exports = router;

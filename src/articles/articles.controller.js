@@ -1,25 +1,24 @@
-const list = (req,res) => {
-    const articles = [
-        {
-          title: "Test Article 0",
-          createdAt: new Date,
-          description: "Test description",
-        },
-        {
-            title: "Test Article 1",
-            createdAt: new Date,
-            description: "Test description 1",
-          }
-      ];
+const service = require('./articles.service');
+
+const list = async (req,res) => {
+    const articles = await service.list();
       res.render("articles/index.ejs", { articles });
+      res.status(200);
+}
+
+const create = async (req,res) => {
+    const article = req.body;
+    const newArticle = await service.create(article);
+    res.status(201);
 }
 
 const renderNewScreen = (req,res) => {
     res.render('articles/new');
 }
 
-
+//exports are structured like this so middleware is easier to add
 module.exports = {
     list: list,
+    create: create,
     renderNewScreen: renderNewScreen,
 }

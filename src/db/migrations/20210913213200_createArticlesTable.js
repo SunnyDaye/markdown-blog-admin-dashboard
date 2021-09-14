@@ -5,6 +5,7 @@ exports.up = function(knex) {
     table.string('title').notNullable();
     table.text('description').notNullable();
     table.text('markdown').notNullable();
+    table.date('createdAt').defaultTo(new Date().toLocaleDateString('en-US'));
   });
 };
 
