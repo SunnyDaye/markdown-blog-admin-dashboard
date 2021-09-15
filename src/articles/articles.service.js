@@ -1,5 +1,5 @@
 const knex = require('../db/connection');
-
+const asyncErrorBoundary = require('../errors/asyncErrorBoundary');
 const list = async () => {
     const articles = await knex('articles')
         .select('*');
@@ -13,7 +13,10 @@ const create = async (article) => {
     return newArticles[0];
 }
 
+const read = async (slug) => {
+
+}
 module.exports = {
-    list,
-    create,
+    list: list,
+    create: create,
 }
