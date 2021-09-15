@@ -9,5 +9,6 @@ router.route('/new')
     .post(controller.create);
 
 router.route('/:slug')
-    .get(controller.read);
+    .get(controller.read)
+    .delete(controller.delete);
 module.exports = router;

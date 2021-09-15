@@ -15,8 +15,13 @@ const read = async (slug) => {
   return article[0];
 };
 
+const destroy = async (slug) => {
+  const articlesDeleted = await knex('articles').where({ slug }).del();
+  return articlesDeleted;
+}
 module.exports = {
   list,
   create,
   read,
+  delete: destroy,
 };

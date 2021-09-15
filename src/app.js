@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const app = express();
+const methodOverride = require("method-override");
 
 /*Routers*/
 const articlesRouter = require("./articles/articles.router");
@@ -10,6 +11,7 @@ const articlesRouter = require("./articles/articles.router");
 app.set("view engine", "ejs");
 
 app.use(express.urlencoded({ extended: false })); //Allows for body's to be attached to req and res.
+app.use(methodOverride('_method'));
 app.get("/", (req, res) => {
   //Landing page is /articles
   res.redirect("/articles");
