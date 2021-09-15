@@ -7,4 +7,7 @@ router.route('/')
 router.route('/new')
     .get(controller.renderNewScreen)
     .post(controller.create);
+
+router.route('/:slug')
+    .get(controller.read);
 module.exports = router;
