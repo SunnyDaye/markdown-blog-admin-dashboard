@@ -3,13 +3,14 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const methodOverride = require("method-override");
+const cors = require("cors");
 
 /*Routers*/
 const articlesRouter = require("./articles/articles.router");
 
 /*View Engine for server side rendering*/
 app.set("view engine", "ejs");
-
+app.use(cors());
 app.use(express.urlencoded({ extended: false })); //Allows for body's to be attached to req and res.
 app.use(methodOverride('_method'));
 app.get("/", (req, res) => {
