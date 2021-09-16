@@ -1,4 +1,11 @@
-const app = require('./app');
-const {PORT} = process.env;
-app.listen(PORT,()=>console.log(`listening on port ${PORT}`));
+const { default: knex } = require("knex");
+const app = require("./app");
+const { PORT } = process.env;
 
+knex.migrate
+  .latest()
+  .then((migrations) => {
+    console.log("migrations", migrations);
+    app.listen(PORT, () => console.log(`listening on port ${PORT}`));
+  })
+  .catch(console.error);
