@@ -25,6 +25,12 @@ const read = async (req, res) => {
     res.render('articles/show.ejs', {article});
 }
 
+const update = async (req, res) => {
+    const updates = {...req.body,sanitizedHtml: dompurify.sanitize(marked(req.body.markdown))};
+    const article = await service.update(req.params.slug,updates);
+    res.redirect(`/articles/${article.slug}`);
+}
+
 const destroy = async (req, res) => {
     const articlesDeleted = await service.delete(req.params.slug);
     console.log(articlesDeleted);
@@ -45,6 +51,7 @@ module.exports = {
     list: asyncErrorBoundary(list),
     create: asyncErrorBoundary(create),
     read: asyncErrorBoundary(read),
+    update:asyncErrorBoundary(update),
     delete: asyncErrorBoundary(destroy),
     renderNewScreen: renderNewScreen,
     renderEditScreen: asyncErrorBoundary(renderEditScreen),

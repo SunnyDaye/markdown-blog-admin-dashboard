@@ -6,7 +6,7 @@ exports.up = function (knex) {
     table.text("markdown").notNullable();
     table.string("slug").notNullable().unique();
     table.text("sanitizedHtml").notNullable();
-    table.date("createdAt").defaultTo(new Date().toLocaleDateString("en-US"));
+    table.date("createdAt").defaultTo(new Date(Date.now()).toLocaleDateString('en-US'));
   });
 };
 

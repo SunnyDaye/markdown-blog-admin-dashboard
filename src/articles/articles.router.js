@@ -13,5 +13,6 @@ router.route('/:slug')
     .delete(controller.delete);
 
     router.route('/:slug/edit')
-    .get(controller.renderEditScreen);
+    .get(controller.renderEditScreen)
+    .put(controller.update);
 module.exports = router;
