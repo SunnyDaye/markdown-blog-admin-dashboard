@@ -1,6 +1,10 @@
 const asyncErrorBoundary = require('../errors/asyncErrorBoundary');
 const service = require('./articles.service');
 const slugify = require('slugify');
+const marked = require('marked');
+const createDomPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
+const dompurify = createDomPurify(new JSDOM().window);
 
 const list = async (req,res) => {
     const articles = await service.list();
@@ -8,8 +12,10 @@ const list = async (req,res) => {
 }
 
 const create = async (req,res) => {
-    const article = {...req.body, slug: slugify(req.body.title,{lower: true, strict: true})};
+    const article = {...req.body, slug: slugify(req.body.title,{lower: true, strict: true}),
+        sanitizedHtml: dompurify.sanitize(marked(req.body.markdown))};
     const newArticle = await service.create(article);
+    console.log(newArticle);
     res.redirect('/');
 }
 
@@ -29,6 +35,11 @@ const renderNewScreen = (req,res) => {
     res.render('articles/new.ejs');
 }
 
+const renderEditScreen = async (req, res) => {
+    const article = await service.read(req.params.slug);
+    res.render('articles/edit.ejs', {article});
+}
+
 //exports are structured like this so middleware is easier to add
 module.exports = {
     list: asyncErrorBoundary(list),
@@ -36,4 +47,5 @@ module.exports = {
     read: asyncErrorBoundary(read),
     delete: asyncErrorBoundary(destroy),
     renderNewScreen: renderNewScreen,
+    renderEditScreen: asyncErrorBoundary(renderEditScreen),
 }

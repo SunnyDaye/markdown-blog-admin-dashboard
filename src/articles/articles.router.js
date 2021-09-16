@@ -11,4 +11,7 @@ router.route('/new')
 router.route('/:slug')
     .get(controller.read)
     .delete(controller.delete);
+
+    router.route('/:slug/edit')
+    .get(controller.renderEditScreen);
 module.exports = router;

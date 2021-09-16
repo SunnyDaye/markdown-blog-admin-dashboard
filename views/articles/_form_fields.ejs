@@ -4,7 +4,8 @@
   required 
   type="text" 
   name="title" 
-  id="title" 
+  id="title"
+  value="<%=article.title%>" 
   class="form-control" />
 </div>
 <div class="form-group">
@@ -14,6 +15,7 @@
     rows="5"
     name="description"
     id="description"
+    value="<%=article.description%>"
     class="form-control"
   ></textarea>
 </div>
@@ -24,6 +26,7 @@
     rows="15"
     name="markdown"
     id="markdown"
+    value="<%=article.markdown%>" 
     class="form-control"
   ></textarea>
 </div>
