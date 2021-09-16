@@ -1,4 +1,4 @@
-const { default: knex } = require("knex");
+const knex  = require("./db/connection");
 const app = require("./app");
 const { PORT } = process.env;
 
